@@ -1,9 +1,9 @@
-package pcc;
+package poj.LakeCounting;
 
 /**
  * Lake counting (<a href="http://poj.org/problem?id=2386">POJ Link</a>).
  */
-public class LakeCounting
+public class Main
 {
     // 庭のサイズ: M x N
     private static final int M = 10;

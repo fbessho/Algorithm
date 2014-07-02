@@ -10,23 +10,18 @@ class KaraokeMachine
 
   def transpose(amount)
     s = ""
-    i = 0
-    while i < @melody.length do
+    for i in 0..(@melody.length-1) do
+      next if @melody[i] == '#'
       if ('A'..'G').include? @melody[i] then
         # binding.pry
-        n = @melody[i].ord - 'A'.ord
-        n *= 2
-        if @melody[i+1] == '#' then
-          i += 1
-          n += 1
-        end
+        n = (@melody[i].ord - 'A'.ord) * 2
+        n += 1 if @melody[i+1] == '#'
  
         n = ((n+1)*11.0/14.0).floor + amount
         s += @@scale[n % 12]
       else
         s += @melody[i]
       end
-      i = i + 1
     end
 
     return s

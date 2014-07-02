@@ -1,11 +1,35 @@
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 # coding: utf-8
+require 'pry'
 
 class KaraokeMachine
+  @@scale = %w(A A# B C C# D D# E F F# G G#)
   def initialize(melody)
+    @melody = melody
   end
 
   def transpose(amount)
-    "" # これは仮実装なので消してください
+    s = ""
+    i = 0
+    while i < @melody.length do
+      if ('A'..'G').include? @melody[i] then
+        # binding.pry
+        n = @melody[i].ord - 'A'.ord
+        n *= 2
+        if @melody[i+1] == '#' then
+          i += 1
+          n += 1
+        end
+ 
+        n = ((n+1)*11.0/14.0).floor + amount
+        s += @@scale[n % 12]
+      else
+        s += @melody[i]
+      end
+      i = i + 1
+    end
+
+    return s
   end
 end
 

@@ -3,21 +3,24 @@
 require 'pry'
 
 class KaraokeMachine
-  @@scale = %w(A A# B C C# D D# E F F# G G#)
+  # s_tmp = %w(A A# B B# C C# D D# E E# F F# G G#)
+  @@scale = %w(A A# B    C C# D D# E    F F# G G#)
+  @@c_map = [0, 1, 2, -1, 3, 4, 5, 6, 7, -1, 8, 9, 10, 11] # conversion map from `s_tmp` to `scale`
+
   def initialize(melody)
-    @melody = melody
+    @m = melody
   end
 
   def transpose(amount)
     s = ""
-    for i in 0..(@melody.length-1) do
-      next if @melody[i] == '#'
+    for i in 0..(@m.length-1) do
+      next if @m[i] == '#'
 
-      # この計算の後nは@melody[i]の対応する@@scaleのindexになる。
-      n = ((@melody[i].ord - 'A'.ord) * 2) + (@melody[i+1] == '#' ? 1 : 0)
-      n = ((n+1)*11.0/14.0).floor
+      # nはs_tmpのindexになる。
+      n = ((@m[i].ord - 'A'.ord) * 2) + (@m[i+1] == '#' ? 1 : 0)
 
-      s += (0..11).include?(n) ? @@scale[(n+amount) % 12] : @melody[i]
+      # A - G#であれば転調した後の音符を、そうでなければそのままの値を返す。
+      s += (n>=0 and n<14) ? @@scale[(@@c_map[n]+amount) % 12] : @m[i]
     end
 
     return s

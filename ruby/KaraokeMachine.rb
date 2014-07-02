@@ -14,8 +14,7 @@ class KaraokeMachine
       next if @melody[i] == '#'
 
       # この計算の後nは@melody[i]の対応する@@scaleのindexになる。
-      n = (@melody[i].ord - 'A'.ord) * 2
-      n += 1 if @melody[i+1] == '#'
+      n = ((@melody[i].ord - 'A'.ord) * 2) + (@melody[i+1] == '#' ? 1 : 0)
       n = ((n+1)*11.0/14.0).floor
 
       s += (0..11).include?(n) ? @@scale[(n+amount) % 12] : @melody[i]

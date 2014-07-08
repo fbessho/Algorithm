@@ -1,11 +1,10 @@
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 # coding: utf-8
-require 'pry'
 
 class KaraokeMachine
   # s_tmp = %w(A A# B B# C C# D D# E E# F F# G G#)
   @@scale = %w(A A# B    C C# D D# E    F F# G G#)
-  @@c_map = [0, 1, 2, -1, 3, 4, 5, 6, 7, -1, 8, 9, 10, 11] # conversion map from `s_tmp` to `scale`
+  # conversion map from `s_tmp` to `scale`
+  @@c_map = [0, 1, 2, -1, 3, 4, 5, 6, 7, -1, 8, 9, 10, 11] 
 
   def initialize(melody)
     @m = melody

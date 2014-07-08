@@ -1,10 +1,10 @@
 # coding: utf-8
 
 class KaraokeMachine
-  # s_tmp = %w(A A# B B# C C# D D# E E# F F# G G#)
-  @@scale = %w(A A# B    C C# D D# E    F F# G G#)
-  # conversion map from `s_tmp` to `scale`
-  @@c_map = [0, 1, 2, -1, 3, 4, 5, 6, 7, -1, 8, 9, 10, 11] 
+  # S_TMP = %w(A A# B B# C C# D D# E E# F F# G G#)
+  SCALE   = %w(A A# B    C C# D D# E    F F# G G#)
+  # conversion map from `S_TMP` to `SCALE`
+  CONV_MAP = [0, 1, 2, -1, 3, 4, 5, 6, 7, -1, 8, 9, 10, 11] 
 
   def initialize(melody)
     @m = melody
@@ -15,11 +15,11 @@ class KaraokeMachine
     for i in 0..(@m.length-1) do
       next if @m[i] == '#'
 
-      # nはs_tmpのindexになる。
+      # nはS_TMPのindexになる。
       n = ((@m[i].ord - 'A'.ord) * 2) + (@m[i+1] == '#' ? 1 : 0)
 
       # A - G#であれば転調した後の音符を、そうでなければそのままの値を返す。
-      s += (n>=0 and n<14) ? @@scale[(@@c_map[n]+amount) % 12] : @m[i]
+      s += (n>=0 and n<14) ? SCALE[(CONV_MAP[n]+amount) % 12] : @m[i]
     end
 
     return s

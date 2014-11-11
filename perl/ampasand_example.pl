@@ -24,6 +24,12 @@ sub print {
     print "My Print: ", @_;
 }
 
-print "test\n";   # calls built-in funciton
-&print("test\n"); # calls `print` subroutine declared above
+# Without adding an ampasand, built-in function will be called
+print("Parenthes without ampasand\n");   # built-in function
+
+# Parenthes around the argument can be omitted
+print "Without ampasand\n";              # Still built-in function
+
+# User declared function can be called with an ampasand
+&print("With ampasand and parenthes\n"); # User declared one
 

@@ -4,9 +4,6 @@ using namespace std;
 void show(int a[], int n);
 
 void sort(int a[], int n) {
-	cout << "Before sort";
-	show(a, n);
-
 	// set initial value of h
 	int h;
 	for(h=1; h<n/9; h=h*3+1);
@@ -43,7 +40,9 @@ int main() {
 		44, 49, 68, 19, 64, 53, 66, 58, 75, 55, 70, 10, 32, 84, 4, 9, 39, 93,
 		15, 80, 73, 27, 17, 25, 72, 67, 86, 97, 22, 71};
 	int n = 100;
+	cout << "Before: ";
+	show(a, n);
 	sort(a, n);
-	cout << "=== SORTED ===" << endl;
+	cout << "After: ";
 	show(a, n);
 }

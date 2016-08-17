@@ -23,14 +23,6 @@ void sort(int a[], int n) {
 	}
 }
 
-void show(int a[], int n) {
-	for(int i=0; i<n; i++) {
-		 cout << a[i];
-		 if(i!=n) cout << " ";
-	}
-	cout << endl;
-}
-
 int main() {
 	int a[100] = {
 		56, 45, 88, 92, 78, 62, 95, 12, 33, 40, 47, 16, 69, 48, 87, 5, 90,

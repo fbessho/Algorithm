@@ -1,0 +1,6 @@
+#ifndef BESSHO_ALGORITHM_SHELLSORT_H_
+#define BESSHO_ALGORITHM_SHELLSORT_H_
+
+void sort(int a[], int n);
+
+#endif  // BESSHO_ALGORITHM_SHELLSORT_H_

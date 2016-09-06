@@ -84,6 +84,9 @@ gmock_main.a : gmock-all.o gtest-all.o gmock_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
+util.o : $(USER_DIR)/util.cpp $(USER_DIR)/util.h $(GMOCK_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/util.cpp
+
 shellsort.o : $(USER_DIR)/shellsort.cpp $(USER_DIR)/shellsort.h $(GMOCK_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/shellsort.cpp
 
@@ -94,11 +97,13 @@ shellsort_unittest.o : $(USER_DIR)/shellsort_unittest.cpp \
 shellsort_unittest : shellsort.o shellsort_unittest.o gmock_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
-bubblesort.o : $(USER_DIR)/bubblesort.cpp $(USER_DIR)/bubblesort.h $(GMOCK_HEADERS)
+bubblesort.o : $(USER_DIR)/bubblesort.cpp $(USER_DIR)/bubblesort.h \
+               $(GMOCK_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/bubblesort.cpp
 
 bubblesort_unittest.o : $(USER_DIR)/bubblesort_unittest.cpp \
-                       $(USER_DIR)/bubblesort.h $(GMOCK_HEADERS)
+                        $(USER_DIR)/bubblesort.h $(USER_DIR)/bubblesort.h \
+                        $(GMOCK_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/bubblesort_unittest.cpp
 
 bubblesort_unittest : bubblesort.o bubblesort_unittest.o gmock_main.a

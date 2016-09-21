@@ -28,10 +28,6 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include -isystem $(GMOCK_DIR)/include
 # Flags passed to the C++ compiler.
 CXXFLAGS += -g -Wall -Wextra -pthread
 
-# All tests produced by this Makefile.  Remember to add new tests you
-# created to the list.
-TESTS = shellsort_unittest bubblesort_unittest
-
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
@@ -46,10 +42,10 @@ GMOCK_HEADERS = $(GMOCK_DIR)/include/gmock/*.h \
 
 # House-keeping build targets.
 
-all : $(TESTS)
+all : gmock.a gmock_main.a
 
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a gmock.a gmock_main.a *.o
+	rm -f gtest.a gtest_main.a gmock.a gmock_main.a *.o
 
 # Builds gtest.a and gtest_main.a.
 
@@ -79,32 +75,3 @@ gmock.a : gmock-all.o gtest-all.o
 
 gmock_main.a : gmock-all.o gtest-all.o gmock_main.o
 	$(AR) $(ARFLAGS) $@ $^
-
-# Builds a sample test.  A test should link with either gtest.a or
-# gtest_main.a, depending on whether it defines its own main()
-# function.
-
-util.o : $(USER_DIR)/util.cpp $(USER_DIR)/util.h $(GMOCK_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/util.cpp
-
-shellsort.o : $(USER_DIR)/shellsort.cpp $(USER_DIR)/shellsort.h $(GMOCK_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/shellsort.cpp
-
-shellsort_unittest.o : $(USER_DIR)/shellsort_unittest.cpp \
-                       $(USER_DIR)/shellsort.h $(GMOCK_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/shellsort_unittest.cpp
-
-shellsort_unittest : shellsort.o shellsort_unittest.o gmock_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
-
-bubblesort.o : $(USER_DIR)/bubblesort.cpp $(USER_DIR)/bubblesort.h \
-               $(GMOCK_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/bubblesort.cpp
-
-bubblesort_unittest.o : $(USER_DIR)/bubblesort_unittest.cpp \
-                        $(USER_DIR)/bubblesort.h $(USER_DIR)/bubblesort.h \
-                        $(GMOCK_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/bubblesort_unittest.cpp
-
-bubblesort_unittest : bubblesort.o bubblesort_unittest.o gmock_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

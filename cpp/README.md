@@ -2,6 +2,7 @@ Rules for this cpp directory.
 
 # Steps to make googletest
 ```
+# Make gmock.a gmock_main.a
 cd <this_dir>
 make
 

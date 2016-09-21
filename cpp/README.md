@@ -1,11 +1,15 @@
 Rules for this cpp directory.
 
-# To make
+# Steps to make googletest
+```
 cd <this_dir>
 make
 
-cd sorting/build
+cd build
 cmake ..
 make
 
-now you should see *unittest binary files
+# List all available unit tests
+find . -type f -name "*test"
+```
+

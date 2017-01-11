@@ -3,3 +3,4 @@ project (algorithm)
 
 add_subdirectory(sorting)
 add_subdirectory(searching)
+add_subdirectory(pcontest)
